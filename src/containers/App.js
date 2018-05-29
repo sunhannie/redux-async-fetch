@@ -29,9 +29,11 @@ this.props:开始获得2次
 nextProps:开始获得2次
 {selectedSubreddit: "reactjs", posts: Array(0), isFetching: true, lastUpdated: undefined, dispatch: ƒ}
 {selectedSubreddit: "reactjs", posts: Array(26), isFetching: false, lastUpdated: 1527585247618, dispatch: ƒ}
+
+通过更改props来确定是否允许
 */
   componentWillReceiveProps(nextProps) {
-    console.log(this.props);  
+    
     if (nextProps.selectedSubreddit !== this.props.selectedSubreddit) {
       const { dispatch, selectedSubreddit } = nextProps
       dispatch(fetchPostsIfNeeded(selectedSubreddit))
@@ -51,6 +53,7 @@ nextProps:开始获得2次
   }
 
   render() {
+      console.log(this.props);  //{selectedSubreddit: "reactjs", posts: Array(0), isFetching: true, lastUpdated: undefined, testProp: undefined, …}
     const { selectedSubreddit, posts, isFetching, lastUpdated } = this.props
     const isEmpty = posts.length === 0
     return (
@@ -84,7 +87,7 @@ nextProps:开始获得2次
 // 我添加testProp，不管我有没有赋值，初始获取得还是undefined，这是因为Redux store没有发生变化的原因吗？
 
 const mapStateToProps = state => {
-  const {testProp} = {'test':'1'}; //或写数组['aa']
+//   const {testProp} = {'test':'1'}; //或写数组['aa']
   const { selectedSubreddit, postsBySubreddit } = state
   const {
     isFetching,
@@ -99,8 +102,8 @@ const mapStateToProps = state => {
     selectedSubreddit,
     posts,
     isFetching,
-    lastUpdated,
-    testProp
+    lastUpdated
+
   }
 }
 

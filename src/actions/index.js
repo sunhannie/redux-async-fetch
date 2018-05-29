@@ -26,14 +26,15 @@ export const receivePosts = (subreddit,json) => ({
 })
 
 /**
- * 
- * json从哪里来的？
+ * 初始subreddit为reactjs
+ * json从哪里来的？ 
  */
 const fetchPosts = subreddit => dispatch => {
-    dispatch(requestPosts(subreddit))
+    console.log(subreddit);
+    dispatch(requestPosts(subreddit))  //第一次（没抓到数据）
     return fetch(`https://www.reddit.com/r/${subreddit}.json`)
     .then(response => response.json())
-    .then(json => dispatch(receivePosts(subreddit, json)))
+    .then(json => dispatch(receivePosts(subreddit, json))) //第二次（抓到数据）
 }
 
 const shouldFetchPosts = (state, subreddit) => {
@@ -49,7 +50,7 @@ const shouldFetchPosts = (state, subreddit) => {
 
 export const fetchPostsIfNeeded = subreddit => (dispatch, getState) => {
   if (shouldFetchPosts(getState(), subreddit)) {
-    return dispatch(fetchPosts(subreddit))
+    return dispatch(fetchPosts(subreddit))   
   }
 }
 

@@ -7,9 +7,11 @@ import {
   REQUEST_POSTS, RECEIVE_POSTS
 } from '../actions'
 
+// action.type:REQUEST_POSTS
 const selectedSubreddit = (state = 'reactjs', action) => {
+    // console.log('action.type:REQUEST_POSTS'+action.type);
     switch (action.type){
-        case SELECT_SUBREDDIT:
+        case SELECT_SUBREDDIT:   
             return action.subreddit
         default:
             return state
