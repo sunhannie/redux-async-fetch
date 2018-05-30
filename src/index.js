@@ -9,7 +9,7 @@ import { createLogger } from 'redux-logger'
 import reducer from './reducers'
 import App from './containers/App'
 import About from './containers/About'
-// import Root from './containers/Root'
+import Root from './containers/Root'
 
 import { Router} from 'react-router'
 
@@ -42,7 +42,7 @@ const store = createStore(
 render(
   <Provider store={store}>
     {/*<BrowserRouter  basename="/1">*/}
-      <App/>
+      <Root/>
     {/*</BrowserRouter>*/}
   </Provider>,
   document.getElementById('root')
@@ -65,6 +65,8 @@ render(
 
 
     假如不用BrowserRouter但是在其他地方用了link，报错：You should not use <Link> outside a <Router>
+
+    报错：You should not use <Route> or withRouter() outside a <Router>
  */
 
 
