@@ -7,7 +7,7 @@ import Posts from '../components/Posts'
 
 import { Link } from 'react-router-dom'
 
-class App extends Component {
+class About extends Component {
   static propTypes = {
     selectedSubreddit: PropTypes.string.isRequired,
     posts: PropTypes.array.isRequired,
@@ -16,24 +16,13 @@ class App extends Component {
     dispatch: PropTypes.func.isRequired
   }
 
-//this.props为：{selectedSubreddit: "reactjs", posts: Array(0), isFetching: true, lastUpdated: undefined, dispatch: ƒ}
   componentDidMount() {
     
     const { dispatch, selectedSubreddit } = this.props
     dispatch(fetchPostsIfNeeded(selectedSubreddit))
   }
 
-/*
-this.props:开始获得2次
-{selectedSubreddit: "reactjs", posts: Array(0), isFetching: true, lastUpdated: undefined, dispatch: ƒ}
-{selectedSubreddit: "reactjs", posts: Array(0), isFetching: true, lastUpdated: undefined, dispatch: ƒ}
 
-nextProps:开始获得2次
-{selectedSubreddit: "reactjs", posts: Array(0), isFetching: true, lastUpdated: undefined, dispatch: ƒ}
-{selectedSubreddit: "reactjs", posts: Array(26), isFetching: false, lastUpdated: 1527585247618, dispatch: ƒ}
-
-通过更改props来确定是否允许
-*/
   componentWillReceiveProps(nextProps) {
     
     if (nextProps.selectedSubreddit !== this.props.selectedSubreddit) {
@@ -55,10 +44,9 @@ nextProps:开始获得2次
   }
 
   render() {
-       //{selectedSubreddit: "reactjs", posts: Array(0), isFetching: true, lastUpdated: undefined, testProp: undefined, …}
+
     const { selectedSubreddit, posts, isFetching, lastUpdated } = this.props
     const isEmpty = posts.length === 0
-    console.log(this.props); 
     return (
       <div>
         <Picker value={selectedSubreddit}
@@ -71,14 +59,6 @@ nextProps:开始获得2次
               {' '}
             </span>
           }
-          {!isFetching &&
-            <button onClick={this.handleRefreshClick}>
-              Refresh 
-            </button> 
-           
-          }
-          {/*{<span><Link to="/12">About</Link></span>}   */}
-           {/*&& 用<div></div>标签弹出  Warning: validateDOMNesting(...): <div> cannot appear as a descendant of <p>. 改成span标签就可以*/}
         </p>
         {isEmpty
           ? (isFetching ? <h2>Loading...</h2> : <h2>Empty.</h2>)
@@ -90,10 +70,8 @@ nextProps:开始获得2次
     )
   }
 }
-// 我添加testProp，不管我有没有赋值，初始获取得还是undefined，这是因为Redux store没有发生变化的原因吗？
 
 const mapStateToProps = state => {
-//   const {testProp} = {'test':'1'}; //或写数组['aa']
   const { selectedSubreddit, postsBySubreddit } = state
   const {
     isFetching,
@@ -113,4 +91,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps)(About)

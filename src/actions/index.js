@@ -14,12 +14,12 @@ export const invalidateSubreddit = subreddit => ({
 })
 
 export const requestPosts = subreddit => ({
-    type:REQUEST_POSTS,
-    subreddit
+  type: REQUEST_POSTS,
+  subreddit
 })
 
 export const receivePosts = (subreddit,json) => ({
-    type:REQUEST_POSTS,
+    type:RECEIVE_POSTS,
     subreddit,
     posts: json.data.children.map(child => child.data),
     receivedAt: Date.now()
