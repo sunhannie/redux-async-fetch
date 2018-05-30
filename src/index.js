@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Link } from 'react-router-dom'   //放在顶处
+import { BrowserRouter} from 'react-router-dom'   //放在顶处
 
 import React from 'react'
 import { render } from 'react-dom'
@@ -13,9 +13,9 @@ import Root from './containers/Root'
 
 import { Router} from 'react-router'
 
-import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
-import createHistory from 'history/createBrowserHistory'
-const history = createHistory()
+// import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
+// import createHistory from 'history/createBrowserHistory'
+// const history = createHistory()
 
 // import { BrowserRouter } from 'react-router-dom'
 
@@ -37,13 +37,20 @@ const store = createStore(
 //   applyMiddleware(...middleware)
 // )
 
+// 不加BrowserRouter标签也能正常运行，应该去了解正在原理
 
+// getConfirmation没有起作用，这是为什么？
+const getConfirmation = (message, callback) => {
+    const allowTransition = window.confirm('message')
+    callback(allowTransition)
+    alert('getConfirmation');
+}
 
 render(
   <Provider store={store}>
-    {/*<BrowserRouter  basename="/1">*/}
+    <BrowserRouter  basename="/b"   getUserConfirmation={getConfirmation}>  
       <Root/>
-    {/*</BrowserRouter>*/}
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 )

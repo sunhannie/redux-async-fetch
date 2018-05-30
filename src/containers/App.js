@@ -77,7 +77,7 @@ nextProps:开始获得2次
             </button> 
            
           }
-          {/*{<span><Link to="/12">About</Link></span>}   */}
+          {<span><Link to="/about">About</Link></span>}   
            {/*&& 用<div></div>标签弹出  Warning: validateDOMNesting(...): <div> cannot appear as a descendant of <p>. 改成span标签就可以*/}
         </p>
         {isEmpty
